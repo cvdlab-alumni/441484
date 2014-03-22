@@ -377,9 +377,53 @@ mock_up_3D = STRUCT([fl0,nord ,east,west,sud, TORRE])
 fl0B= T([1,2])([-5.75,0.45])(fl0B)
 fl0B= COLOR([0.67,1.47,0.93])(fl0B)
 
+tetto=POLYLINE([[0.55,6],[3.55,7]])
+tetto=PROD([tetto,Q(30.8)])
+tetto= R([2,3])(PI/2)(tetto)
+tetto= T(2)(30.8)(tetto)
+
+
+tetto2 = POLYLINE([[3.55,9],[7.45,10]])
+tetto2=PROD([tetto2,Q(30.8)])
+tetto2= R([2,3])(PI/2)(tetto2)
+tetto2= T(2)(30.8)(tetto2)
+
+
+#tetto33 = POLYLINE([[7.45,10],[11.35,9]])
+
+
+tetto3 = POLYLINE([[7.45,10],[11.35,9]])
+tetto3=PROD([tetto3,Q(30.8)])
+tetto3= R([3,2])(PI/2)(tetto3)
+tetto3= T([1,3])([-6.6,22.2])(tetto3)
+tetto3= R([1,3])(-PI/6)(tetto3)
+
+
+tetto33 = POLYLINE([[7.45,10],[11.35,9]])
+tetto33=PROD([tetto33,Q(30.8)])
+tetto33= R([3,2])(PI/2)(tetto33)
+tetto33= T([1,3])([-1.7,21.4])(tetto33)
+tetto33= R([1,3])(-PI/6)(tetto33)
 
 
 
-solid_model_3D = STRUCT([mock_up_3D, fl0B, finc])
+tetto31 = POLYLINE([[7.45,9],[7.45,7]])
+tetto31=PROD([tetto31,Q(30.8)])
+tetto31= R([3,2])(PI/2)(tetto31)
+tetto31= R([1,3])(-PI)(tetto31)
+tetto31= T(1)(10.5)(tetto31)
+
+
+
+
+tetto21 = POLYLINE([[7.45,9],[7.45,7]])
+tetto21=PROD([tetto21,Q(30.8)])
+tetto21= R([3,2])(PI/2)(tetto21)
+tetto21= R([1,3])(PI)(tetto21)
+tetto21= T(1)(18.5)(tetto21)
+
+
+
+solid_model_3D = STRUCT([mock_up_3D, fl0B, finc, tetto, tetto2, tetto3,tetto33, tetto31, tetto21])
 
 VIEW(solid_model_3D)
