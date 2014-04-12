@@ -20,7 +20,6 @@ GRID = COMP([INSR(PROD),AA(QUOTE)])
 
 
 
-
 def circle(r):
 	def circle0(p):
 		alpha = p[0]
@@ -358,6 +357,7 @@ prato = COLOR([0.482,0.627,0.356])(prato)
 
 parc1 = GRID([[30],[40]])
 parc1=T([1,2])([-5,60])(parc1)
+parc1 = COLOR(ColorPlasm([112,128,144]))(parc1)
 
 # fare le strisce dei parcheggi ...verranno copiate nel secondo parcheggio
 
@@ -365,6 +365,7 @@ parc1=T([1,2])([-5,60])(parc1)
 
 pair_x = [T(2)(-120), parc1]
 parc2 = STRUCT(NN(1)(pair_x))
+parc2 = COLOR(ColorPlasm([112,128,144]))(parc2)
 
 
 
@@ -426,10 +427,12 @@ palazzo1 = T([1,2])([-70,55])(palazzo1)
 
 viale3 = CUBOID([10,70]) # ok
 viale3 = T([1,2])([-40,10])(viale3)
+viale3 = COLOR(ColorPlasm([112,128,144]))(viale3)
 
 
 viale4 = CUBOID([20,10])
 viale4 = T([1,2])([-55,70])(viale4)
+viale4 = COLOR(ColorPlasm([112,128,144]))(viale4)
 
 palazzo11 = STRUCT([palazzo1, viale3, viale4])
 
@@ -445,6 +448,7 @@ palazzi12 = STRUCT([palazzo11, palazzo22])
 
 viale1 = CUBOID([10,60])
 viale1 = T([1,2])([-50,-50])(viale1)
+viale1 = COLOR(ColorPlasm([112,128,144]))(viale1)
 
 
 palazzo3 = R([1,2])(-PI/2)(palazzo2)
@@ -463,17 +467,27 @@ parcheggi = T([1,2])([30,10])(parcheggi)
 
 viale2 = CUBOID([90,10])
 viale2 = T([1,2])([-35,10])(viale2)
+viale2 = COLOR(ColorPlasm([112,128,144]))(viale2)
 
 
 viale5 = CUBOID([100,10]) # ok
 viale5 = T([1,2])([-35,58])(viale5)
+viale5 = COLOR(ColorPlasm([112,128,144]))(viale5)
 
 
 
 viale6 = CUBOID([10,30]) # ok
 viale6 = T([1,2])([50,-70])(viale6)
+viale6 = COLOR(ColorPlasm([112,128,144]))(viale6)
 
+#112	128	144
 
+tettoNavataLat = POLYLINE([[26.2,22.33],[25.65,28.37],[21.13,28.37],[21.14,22.33],[26.2,22.33]])
+tettoNavataLat= SOLIDIFY(tettoNavataLat)
+tettoNavataLat = S([1,2,3])([2.4,2.4,2.4])(tettoNavataLat)
+tettoNavataLat = COLOR(ColorPlasm([210,180,140]))(tettoNavataLat)
 
+tettoNavataLat = T([1,2,3])([-28,-39.7,12])(tettoNavataLat)
 
-completo = STRUCT([solid_model_3D, prato, parcheggi, palazzi12, palazzo3, palazzo4, viale5, viale6])
+completo = STRUCT([tettoNavataLat,solid_model_3D, prato, parcheggi, palazzi12, palazzo3, palazzo4, viale5, viale6])
+

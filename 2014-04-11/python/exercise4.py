@@ -149,15 +149,45 @@ lampioni=STRUCT([lampione_temp5, lampione_temp4, lampione_temp3, lampione, lampi
 
 
 
+dom1 = INTERVALS(PI*2)(4)
+dom2 = INTERVALS(PI*2)(36)
+
+segnale = MAP(circle(0.05))(dom2)
+segnale=T([1,2])([0.25,0.05])(segnale)
+segnale=SOLIDIFY(segnale)
+segnale= PROD([segnale, Q(4)])
+
+
+segn=MAP(circle(0.7))(dom1)
+segn= PROD([segn, Q(0.1)])
+
+segn=ROTATE([1,2])(PI/4)(segn)
+segn=T([1,2])([0.25,0.5])(segn)
+segn=ROTATE([2,3])(PI/2)(segn)
+segn=T([3])([4])(segn)
+segn=T([2])([0.1])(segn)
+
+segn= JOIN(segn)
+segn= COLOR(ColorPlasm([0,127,255]))(segn)
+
+
+obj = PROD([ OFFSET([0.5,0.25])(TEXT("P")) , Q(0.1) ]) 
+obj = S([1,2,3])([0.1,0.1,0.1])(obj)
+obj=ROTATE([2,3])(PI/2)(obj)
+obj=T([1,3])([0.1,4.2])(obj)
+
+segnale = STRUCT([obj, segn, segnale])
+segnale=S([1,2,3])([2,2,2])(segnale)
+segnale=ROTATE([1,2])(-PI/4)(segnale)
+segnale2=ROTATE([1,2])(PI)(segnale)
+
+segnale=T([1,2])([60.5,7])(segnale)
+
+segnale2=T([1,2])([-42.5,33])(segnale2)
 
 
 
-
-
-
-
-
-completo = STRUCT([lampioni,  qqq2, qqq, baseFont , alberiO, albero121,albero23, albero34, albero, completo])
+completo = STRUCT([segnale2, segnale,lampioni,  qqq2, qqq, baseFont , alberiO, albero121,albero23, albero34, albero, completo])
 VIEW(completo)
 
 
