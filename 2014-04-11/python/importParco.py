@@ -265,7 +265,6 @@ viale6 = CUBOID([10,30]) # ok
 viale6 = T([1,2])([50,-70])(viale6)
 viale6 = COLOR(ColorPlasm([112,128,144]))(viale6)
 
-#112	128	144
 
 tettoNavataLat = POLYLINE([[26.2,22.33],[25.65,28.37],[21.13,28.37],[21.14,22.33],[26.2,22.33]])
 tettoNavataLat= SOLIDIFY(tettoNavataLat)
@@ -275,3 +274,4 @@ tettoNavataLat = COLOR(ColorPlasm([210,180,140]))(tettoNavataLat)
 tettoNavataLat = T([1,2,3])([-28,-39.7,12.1])(tettoNavataLat)
 
 completo = STRUCT([tettoNavataLat,solid_model_3D, prato, parcheggi, palazzi12, palazzo3, palazzo4, viale5, viale6])
+

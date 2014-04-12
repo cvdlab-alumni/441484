@@ -1,5 +1,8 @@
+
 from pyplasm import *
-from larcc import *
+from mapper import *
+from myfont import *
+
 
 def ColorPlasm(color):
     return [color[0]/255., color[1]/255., color[2]/255.]

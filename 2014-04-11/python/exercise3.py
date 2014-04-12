@@ -265,7 +265,6 @@ viale6 = CUBOID([10,30]) # ok
 viale6 = T([1,2])([50,-70])(viale6)
 viale6 = COLOR(ColorPlasm([112,128,144]))(viale6)
 
-#112	128	144
 
 tettoNavataLat = POLYLINE([[26.2,22.33],[25.65,28.37],[21.13,28.37],[21.14,22.33],[26.2,22.33]])
 tettoNavataLat= SOLIDIFY(tettoNavataLat)
