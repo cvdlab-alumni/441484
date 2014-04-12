@@ -54,6 +54,9 @@ alberiO = T([1,2])([1,40])(alberiOrizz1)  # dietro abbazia
 alberiVert1 = STRUCT(NN(2)(albero1)) #  lista generica verticale
 
 
+
+# creo le strisce dei parcheggi
+
 qab = QUOTE([10,-10,10])
 qqq =  QUOTE([0.31,-4]*4)
 qqq = PROD([qab, qqq]) #  lista generica verticale
@@ -68,8 +71,7 @@ qqq2 = T([1])([137])(qqq)
 
 
 
-
-
+# obelisco
 
 baseFont = CYLINDER([10.8, 1])(20)
 baseFont = T([1,2])([10,95])(baseFont)  
@@ -90,15 +92,15 @@ Font2 = CYLINDER([4.8, 40])(4)
 Font2 = T([1,2])([10,95])(Font2)  
 Font2= COLOR(ColorPlasm([184,134,11]))(Font2)
 
-Font3 = CUBOID([6.8,6.8])
-p = [3.4,3.4,15]
-Font3=JOIN([MK(p),Font3])
+C3 = CUBOID([6.4,6.4])
+p = [3.2,3.2,15]
+C3=JOIN([MK(p),C3])
 
-Font3 = R([1,2])(-PI/4)(Font3)  
-Font3 = T([1,2,3])([5.3,95,40])(Font3)  
+Font3 = R([1,2])(-PI/4)(C3)  
+Font3 = T([1,2,3])([5.3,95,37])(Font3)  
 Font3= COLOR(ColorPlasm([184,134,11]))(Font3)
 
-Font = STRUCT([Font3, Font2, Font1,Font])
+Font = STRUCT([Font, Font2, Font1,baseFont, Font3])
 
 
 
@@ -228,7 +230,11 @@ panchina3 = T([2])([62.5])(panchina2)
 
 
 
-completo = STRUCT([Font ,panchina3, panchina2, panchina1,segnale2, segnale,lampioni,  qqq2, qqq, baseFont , alberiO, albero121,albero23, albero34, albero, completo])
-VIEW(completo)
+#finale = STRUCT([Font ,panchina3, panchina2, panchina1,segnale2, segnale,lampioni,  qqq2, qqq, baseFont , alberiO, albero121,albero23, albero34, albero, completo])
+
+
+finale = STRUCT([Font, panchina3, panchina2, panchina1,segnale2, segnale,lampioni,  qqq2, qqq, baseFont , alberiO, albero121,albero23, albero34, albero, completo])
+
+VIEW(finale)
 
 
