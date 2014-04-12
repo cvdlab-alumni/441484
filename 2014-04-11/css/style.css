@@ -1155,3 +1155,227 @@
 			background-color: #fff;
 
 		}
+		
+	@charset "utf-8";
+/* CSS Document */
+
+body{
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
+	background-color:#ddd;
+	color:#000;
+	font-size:100%;
+	font-family:Arial, Helvetica, sans-serif;
+}
+/* stili pagina*/
+a{
+	color:#fff;
+						-webkit-transition: 0.5s ease-out;
+-moz-transition:0.5s ease-out;
+-o-transition: 0.5s ease-out;
+transition: 0.5s ease-out;
+}
+a:hover{
+	color:#ff6600;
+}
+strong{
+	font-size:150%;
+}
+/* elementi pagina*/
+.header{
+	width:96%;
+	padding:2%;
+	background-color:#1b1b1b;
+	height:auto;
+	text-align:center;
+	color:#fff;
+	font-size:80%;
+}
+/* main è la classe contenitore, ovvero il contenitore di tutto il sito, se volete usarla potete modificare questa classe a vostro piacimento*/
+.main{
+	width:1250px;
+	margin-left:auto;
+	height:auto;
+	margin-right:auto;
+		margin-top:20px;
+}
+.title{
+	width:98%;
+	padding:1%;
+	margin-bottom:25px;
+	border-bottom:2px solid #900;
+	font-weight:bold;
+	color:#900;
+	font-size:200%;
+}
+.sponsor{
+	width:780px;
+	margin-top:150px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.credits{
+	width:98%;
+	padding:1%;
+	position:fixed;
+	bottom:0;
+	left:0;
+	text-align:center;
+	font-size:80%;
+	background-color:#333;
+	color:#fff;
+}
+/* menu navigazione*/
+#menu{
+	width:80%;
+	padding:0;
+	height:40px;
+
+}
+#menu{
+	background: #4c4e5a; /*colore di sfondo, se vuoi cambiare il colore di sfondo del menù devi modificare questo codice */
+    background: -webkit-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%); /*sfumatura dello sfondo, se vuoi cambiare i colori di sfondo del menù devi modificare questi codici, ricordati di cambiarlo in tutte le righe */
+    background: -moz-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
+    background: -o-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
+    background: -ms-linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
+    background: linear-gradient(top, #4c4e5a 0%,#2c2d33 100%);
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-o-border-radius:10px;
+	-ms-border-radius:10px;
+}
+#menu a{
+	text-decoration:none;
+	color:#fff;
+	height:40px;
+	background-color:transparent;
+					-webkit-transition: 0.5s ease-out;
+-moz-transition:0.5s ease-out;
+-o-transition: 0.5s ease-out;
+transition: 0.5s ease-out;
+}
+#menu a:hover{
+	color:#ff6600;
+}
+#menu ul{
+	width:100%;
+	height:40px;
+	margin-left:auto;
+	margin-right:auto;
+	list-style:none;
+	display:inline;
+	color:#fff;
+	margin:0;
+	padding:0;
+		line-height:40px;
+
+}
+#menu ul li{
+	float:left;
+	width:15.85%;
+	padding-left:2%;
+	padding-right:2%;
+	text-align:center;
+	font-size:80%;
+	height:40px;
+	border-left: 1px solid #393942;
+    border-right: 1px solid #4f5058;
+	background-color:transparent;
+						-webkit-transition: 0.5s ease-out;
+-moz-transition:0.5s ease-out;
+-o-transition: 0.5s ease-out;
+transition: 0.5s ease-out;
+}
+#menu li:first-child{
+	border-left:none;
+}
+#menu li:first-child:hover{
+	border-radius:10px 0 0 10px ;
+	-webkit-border-radius:10px 0 0 10px ;
+	-moz-border-radius:10px 0 0 10px ;
+	-o-border-radius:10px 0 0 10px ;
+	-ms-border-radius:10px 0 0 10px ;;
+
+}
+#menu li:last-child{
+	border-right:none;
+		border-radius:0 10px 10px 0 ;
+		-webkit-border-radius:0 10px 10px 0 ;
+		-moz-border-radius:0 10px 10px 0 ;
+		-o-border-radius:0 10px 10px 0 ;
+		-ms-border-radius:0 10px 10px 0 ;
+	
+}
+#menu li:last-child:hover{
+	border-right:none;	
+}
+#menu ul li:hover{
+	color:#ff6600;
+						-webkit-transition: 0.5s ease-out;
+-moz-transition:0.5s ease-out;
+-o-transition: 0.5s ease-out;
+transition:0.5s ease-out;
+	background: #2c2d33;
+}
+/* visualizzazione per schermi inferiori a 1280px, per esempio portatili con schermi da 13 pollici*/
+@media screen and  (max-width: 1280px) {
+	.main{
+		width:100%;
+		padding:1%;
+	}
+	#menu{
+		width:500px;
+		margin-left:200px;
+	}
+	#menu ul li{
+		font-size:80%;
+		width:25%;
+	}
+}
+/* visualizzazione per schermi con risoluzione a 1024 px per esempio netbook o tablet in visione orizzontale */
+@media screen and  (max-width: 1024px) {
+		#menu ul li{
+		font-size:80%;
+		width:15.8%;
+	}
+}
+/* visualizzazione per schermi con risoluzione a 800 px per alcuni tablet in visione orizzontale e verticale */
+@media screen and  (max-width: 800px) {
+		#menu ul li{
+		font-size:80%;
+		width:15.6%;
+	}
+	.sponsor{
+		display:none;
+	}
+}
+/* visualizzazione per schermi con risoluzione a 1024 px tutti i dispositivi mobili tipo touchscreen */
+@media screen and  (max-width: 680px) {
+	.main{
+		width:98%;
+		padding:1%;
+	}
+	
+	#menu{
+		width:100%;
+		height:auto;
+		border-radius:0;
+	}
+	#menu ul{
+		width:100%;
+		height:auto;
+	}
+	#menu ul li{
+		float:none;
+		width:50%;
+		padding:1%;
+		border-left:none;
+		border-right:none;
+		font-size:80%;
+		border-top: 1px solid #393942;
+    border-bottom: 1px solid #4f5058;
+	}
+}
