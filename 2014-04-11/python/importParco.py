@@ -470,5 +470,3 @@ viale5 = T([1,2])([-35,58])(viale5)
 
 completo = STRUCT([solid_model_3D, prato, parcheggi, palazzi12, palazzo3, palazzo4, viale5])
 
-
-VIEW(completo)
