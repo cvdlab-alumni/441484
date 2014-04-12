@@ -370,6 +370,10 @@ parc2 = STRUCT(NN(1)(pair_x))
 
 palazzo1 =GRID([[20],[40],[40]])
 
+
+basePalazzo1 =GRID([[30],[50],[0]])
+basePalazzo1 = T([1,2])([-5,-5])(basePalazzo1)
+basePalazzo1= COLOR(ColorPlasm([61,43,31]))(basePalazzo1)
 finestra1 = GRID([[3],[0],[6]])
 finestra1 = T([1,3])([3.5,30])(finestra1)
 
@@ -415,7 +419,7 @@ porta1 = T(2)(17)(porta1)
 
 
 
-palazzo1 = STRUCT([palazzo1, finestre, porta1])
+palazzo1 = STRUCT([palazzo1, finestre, porta1, basePalazzo1])
 palazzo1 = T([1,2])([-70,55])(palazzo1)
 
 
@@ -466,9 +470,13 @@ viale5 = T([1,2])([-35,58])(viale5)
 
 
 
+viale6 = CUBOID([10,30]) # ok
+viale6 = T([1,2])([50,-70])(viale6)
 
 
-completo = STRUCT([solid_model_3D, prato, parcheggi, palazzi12, palazzo3, palazzo4, viale5])
+
+
+completo = STRUCT([solid_model_3D, prato, parcheggi, palazzi12, palazzo3, palazzo4, viale5, viale6])
 
 
 VIEW(completo)

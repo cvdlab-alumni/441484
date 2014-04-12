@@ -46,7 +46,19 @@ alberiVert1 = STRUCT(NN(2)(albero1)) #  lista generica verticale
 baseFont = CYLINDER([10.8, 1])(20)
 baseFont = T([1,2])([10,95])(baseFont)  
 
+qab = QUOTE([10,-10,10])
+qqq =  QUOTE([0.31,-4]*4)
+qqq = PROD([qab, qqq]) #  lista generica verticale
+qqq = R([1,2])(PI/2)(qqq)  
 
-completo = STRUCT([baseFont , alberiO, albero121,albero23, albero34, albero, completo])
+qqq = T([1,2])([-52,5])(qqq)  
+qqq= COLOR(ColorPlasm([0,49,83]))(qqq)
+
+
+qqq2 = T([1])([137])(qqq) 
+
+
+
+completo = STRUCT([qqq2, qqq, baseFont , alberiO, albero121,albero23, albero34, albero, completo])
 #solid_model_3D, prato, parcheggi, palazzi12, viale1, palazzo3, palazzo4, viale2, viale5
 VIEW(completo)
