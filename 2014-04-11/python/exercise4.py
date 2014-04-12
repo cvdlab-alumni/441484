@@ -89,18 +89,17 @@ aafaro=ROTATE([2,3])(PI/2)(aafaro)
 aafaro=ROTATE([1,2])(PI/2)(aafaro)
 aafaro=T([1,2,3])([0,0.4,0])(aafaro)
 
-palo3=T([1,2,3])([6,-0.4,14.5])(aafaro)
+palo3=T([1,2,3])([6,-0.4,14.3])(aafaro)
 
 palo=STRUCT([palo1,palo2,palo3])
 palo = COLOR(ColorPlasm([178,178,178]))(palo)
 
 luce= CUBOID([1,0.5,0.2])
-luce=T([1,2,3])([6.5,-0.2,14.4])(luce)
+luce=T([1,2,3])([6.5,-0.2,14.2])(luce)
 luce = COLOR(ColorPlasm([255,255,0]))(luce)
 
 lampione0=STRUCT([palo,luce])
 lampione=STRUCT([palo,luce])
-
 
 lampione=T([1,2])([-55,-45])(lampione)
 
@@ -113,10 +112,6 @@ lampione2=T([1,2])([-20,35])(lampione)
 lampione3=T([1,2])([30,30])(lampione2)
 
 
-
-#T5=T(2)(20)
-#lampioni1=STRUCT(NN(6)([T5, lampione]))
-#lampioni1=T([1,2,3])([60,25,1])(lampioni1)
 
 
 lampione_temp1=ROTATE([1,2])(PI/4)(lampione0)
@@ -145,7 +140,6 @@ lampione_temp5=T([1,2])([-30,-30])(lampione_temp4)
 lampioni=STRUCT([lampione_temp5, lampione_temp4, lampione_temp3, lampione, lampione2, lampione3, lampione_temp2, lampione_temp1])
 
 
-#lampione_temp2=ROTATE([1,2])(PI)(lampione0)
 
 
 

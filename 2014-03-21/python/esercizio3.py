@@ -329,6 +329,8 @@ floor2cont5 = POLYLINE([[22.1,29.22],[20,29.22],[20,30.7],[19.4,30.7]])
 
 floor2cont3 = (STRUCT([floor2cont2,floor2cont3,floor2cont5,floor2cont4]))
 
+
+
 floor2cont3=SOLIDIFY(floor2cont3)
 
 floor2cont3=T(1)(-5.8)(floor2cont3)
@@ -370,6 +372,10 @@ TORRE= COLOR([0.67,1.47,0.93])(TORRE)
 
 fl0B=PROD([interno,Q(6)])
 fl0B=STRUCT([fl0B,PROD([circ1,Q(6)])])
+
+VIEW(fl0B)
+
+
 mock_up_3D = STRUCT([fl0,nord ,east,west,sud, TORRE])
 
 

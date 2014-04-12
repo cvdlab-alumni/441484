@@ -260,5 +260,4 @@ tettoNavataLat = T([1,2,3])([-7,0,6.1])(tettoNavataLat)
 
 solid_model_3D = STRUCT([tettoNavataLat, mock_up_3D, tettoFinale])
 
-VIEW(solid_model_3D)
 

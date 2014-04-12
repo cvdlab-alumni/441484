@@ -162,5 +162,3 @@ mock_up_3D = STRUCT([fl0, facciateLaterali, TORRE])
 
 
 solid_model_3D = STRUCT([mock_up_3D, tettoFinale, tettoNavataLat])
-
-VIEW(solid_model_3D)
