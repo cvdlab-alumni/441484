@@ -59,6 +59,105 @@ qqq2 = T([1])([137])(qqq)
 
 
 
-completo = STRUCT([qqq2, qqq, baseFont , alberiO, albero121,albero23, albero34, albero, completo])
-#solid_model_3D, prato, parcheggi, palazzi12, viale1, palazzo3, palazzo4, viale2, viale5
+
+
+
+def circle (r):
+	def circ (p):
+		return ([r*COS(p[0]),r*SIN(p[0])])
+	return circ
+
+dom = INTERVALS(PI)(6)
+
+
+
+
+
+
+palo1 = CYLINDER([0.3, 15])(100)
+
+palo2 = CYLINDER([0.3, 6.1])(100)
+palo2=ROTATE([1,3])(-PI/2)(palo2)
+palo2=T([1,2,3])([-0.1,0.01,14.6])(palo2)
+
+faro=MAP(circle(0.7))(dom)
+
+aafaro=SOLIDIFY(faro)
+
+aafaro= PROD([aafaro, Q(2)])
+aafaro=ROTATE([2,3])(PI/2)(aafaro)
+aafaro=ROTATE([1,2])(PI/2)(aafaro)
+aafaro=T([1,2,3])([0,0.4,0])(aafaro)
+
+palo3=T([1,2,3])([6,-0.4,14.5])(aafaro)
+
+palo=STRUCT([palo1,palo2,palo3])
+palo = COLOR(ColorPlasm([178,178,178]))(palo)
+
+luce= CUBOID([1,0.5,0.2])
+luce=T([1,2,3])([6.5,-0.2,14.4])(luce)
+luce = COLOR(ColorPlasm([255,255,0]))(luce)
+
+lampione0=STRUCT([palo,luce])
+lampione=STRUCT([palo,luce])
+
+
+lampione=T([1,2])([-55,-45])(lampione)
+
+
+T1=T(2)(20)
+lampione=STRUCT(NN(2)([T1, lampione]))
+
+lampione2=T([1,2])([-20,35])(lampione)
+
+lampione3=T([1,2])([30,30])(lampione2)
+
+
+
+#T5=T(2)(20)
+#lampioni1=STRUCT(NN(6)([T5, lampione]))
+#lampioni1=T([1,2,3])([60,25,1])(lampioni1)
+
+
+lampione_temp1=ROTATE([1,2])(PI/4)(lampione0)
+lampione_temp1=T([1,2])([45,-60])(lampione_temp1)
+
+
+
+
+lampione_temp2=ROTATE([1,2])(-PI/2)(lampione0)
+lampione_temp2=T([1,2])([60,70])(lampione_temp2)
+
+T5=T(1)(-20)
+lampione_temp2=STRUCT(NN(4)([T5, lampione_temp2]))
+
+
+
+lampione_temp3=ROTATE([1,2])(-PI)(lampione0)
+lampione_temp3=T([1,2])([75,85])(lampione_temp3)
+T4=T(2)(-20)
+lampione_temp3=STRUCT(NN(2)([T4, lampione_temp3]))
+
+lampione_temp4=T([1,2])([20,-35])(lampione_temp3)
+
+lampione_temp5=T([1,2])([-30,-30])(lampione_temp4)
+
+lampioni=STRUCT([lampione_temp5, lampione_temp4, lampione_temp3, lampione, lampione2, lampione3, lampione_temp2, lampione_temp1])
+
+
+#lampione_temp2=ROTATE([1,2])(PI)(lampione0)
+
+
+
+
+
+
+
+
+
+
+
+completo = STRUCT([lampioni,  qqq2, qqq, baseFont , alberiO, albero121,albero23, albero34, albero, completo])
 VIEW(completo)
+
+
