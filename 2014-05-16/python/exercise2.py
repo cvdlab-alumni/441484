@@ -5,50 +5,74 @@ sys.path.insert(0, '/Users/Amirs/Desktop/grafica computazionale/lar-cc/lib/py')
 
 
 from importEs1 import *
-from architectural import *
 
 
 dom1D = INTERVALS(1)(32)
 dom2D = PROD([dom1D,dom1D])
 
 def bezierS1(controlpoints):
-	return BEZIER(S1)(controlpoints)
+   return BEZIER(S1)(controlpoints)
 
 def bezierS2(f):
-	return BEZIER(S2)(f)
+   return BEZIER(S2)(f)
 
 def bezierMappata_1D(controlpoints):
-	return MAP(bezierS1(controlpoints))(INTERVALS(1)(32))
+   return MAP(bezierS1(controlpoints))(INTERVALS(1)(32))
 
 
 def bezierMappata_2D(functions):
-	return MAP(BEZIER(S2)(functions))(dom2D)
+   return MAP(BEZIER(S2)(functions))(dom2D)
 
 def spiralStair(width=0.2,R=1.,r=0.5,riser=0.1,pitch=2.,nturns=2.,steps=18):
-	V,CV = larSolidHelicoid(width,R,r,pitch,nturns,steps)()
-	W = CAT([[V[k],V[k+1],V[k+2],V[k+3]]+[SUM([V[k+1],[0,0,-riser]]),SUM([V[k+3],[0,0,-riser]])]
-		for k,v in enumerate(V[:-4]) if k%4==0])
-	for k,w in enumerate(W[:-12]):
-		if k%6==0: W[k+1][2] = W[k+10][2]; W[k+3][2] = W[k+11][2]
-        nsteps = len(W)/12
-        CW =[SUM([[0,1,2,3,6,8,10,11],[6*k]*8]) for k in range(nsteps)]
-        return W,CW
+   V,CV = larSolidHelicoid(width,R,r,pitch,nturns,steps)()
+   W = CAT([[V[k],V[k+1],V[k+2],V[k+3]]+[SUM([V[k+1],[0,0,-riser]]),SUM([V[k+3],[0,0,-riser]])]
+      for k,v in enumerate(V[:-4]) if k%4==0])
+   for k,w in enumerate(W[:-12]):
+      if k%6==0:
+         W[k+1][2] = W[k+10][2]; W[k+3][2] = W[k+11][2]
+         nsteps = len(W)/12
+         CW =[SUM([[0,1,2,3,6,8,10,11],[6*k]*8]) for k in range(nsteps)]
+         return W,CW
 
 def ColorPlasm(color):
     return [color[0]/255., color[1]/255., color[2]/255.]
 
 
 
-#VIEW(STRUCT(MKPOLS(master)))
-#diagram = R([1,2])(PI/2)(DRAW(master))
+
+
+
+def VIEW_MODEL(master):
+   hpc = SKEL_1(STRUCT(MKPOLS(master)))
+   hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
+   VIEW(hpc)
+
+
+
+
+def REMOVE_CELL(master):
+   def REMOVE_CELL0(scelta=[]):
+      if len(scelta) == 0:
+         v=True
+         while v == True:
+            i = input("Enter a number: (scrivere -1 per uscire) ")
+            if(i < 0):
+               v=False
+            scelta.append(i)
+      master1 = master[0], [cell for k,cell in enumerate(master[1]) if not (k in scelta)] 
+      return master1
+   return REMOVE_CELL0
+
+
+
+
+
 diagram = larApply(r(0,0,-PI/2))(master)
 diagram0 = larApply(r(0,0,PI))(diagram)
 
 
-#VIEW(STRUCT(MKPOLS(diagram)))
 
-# complesso totale diviso in 4
-master = assemblyDiagramInit([3,2,6])([[27.5,7,27.5],[18,18],[0.5,10.5,10.5,10.5,10.5,0.5]])
+master = assemblyDiagramInit([3,2,8])([[27.5,7,27.5],[18,18],[0.5,10.5,0.3,10.5,0.3,10.5,0.3,10.5]])
 
 V,CV = master
 hpc = SKEL_1(STRUCT(MKPOLS(master)))
@@ -57,209 +81,48 @@ hpc = cellNumbering (master,hpc)(range(len(CV)),CYAN,2)
 #VIEW(hpc)
 
 
+master = REMOVE_CELL(master)([23,21,19,17,25,27,29,31])
 
-toMerge = 1
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-#VIEW(STRUCT([hpc,cell]))     
 
-# 
+#VIEW_MODEL(master)
 
 
-master = diagram2cell(diagram,master,toMerge)   
-#VIEW(STRUCT(MKPOLS(master)))
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
 
 
 
 
+master = diagram2cell(diagram,master,1) 
 
+master = diagram2cell(diagram,master,2) 
+master = diagram2cell(diagram,master,3) 
+master = diagram2cell(diagram,master,4) 
+master = diagram2cell(diagram,master,5) 
+master = diagram2cell(diagram,master,6) 
+master = diagram2cell(diagram,master,7) 
+master = diagram2cell(diagram,master,8) 
 
-toMerge = 1
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
 
-# 
 
 
-master = diagram2cell(diagram,master,toMerge) 
-#VIEW(STRUCT(MKPOLS(master)))
+master = diagram2cell(diagram0,master,25) 
 
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
+master = diagram2cell(diagram0,master,26) 
+master = diagram2cell(diagram0,master,27) 
+master = diagram2cell(diagram0,master,28) 
 
 
 
+master = diagram2cell(diagram0,master,17) 
+master = diagram2cell(diagram0,master,18) 
+master = diagram2cell(diagram0,master,19) 
+master = diagram2cell(diagram0,master,20) 
 
-toMerge = 1
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
 
-# 
+#VIEW_MODEL(master)
 
-
-master = diagram2cell(diagram,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-toMerge = 1
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-
-
-toMerge = 3
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-
-toMerge = 3
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-toMerge = 3
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-toMerge = 3
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-
-
-
-toMerge = 23
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram0,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-toMerge = 23
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram0,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-toMerge = 23
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram0,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-toMerge = 23
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram0,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-toMerge = 17
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram0,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-
-toMerge = 17
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram0,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-toMerge = 17
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram0,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
-
-
-toMerge = 17
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
-
-# 
-
-
-master = diagram2cell(diagram0,master,toMerge)   
-hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-#VIEW(hpc)
 
 struttura = STRUCT(MKPOLS(master))
+
 #VIEW(struttura)
 
 
@@ -454,24 +317,34 @@ giardino3 = COLOR(ColorPlasm([23,114,69]))(giardino3)
 # scala esterna d'emergenza
 
 
-a=STRUCT(MKPOLS(spiralStair(0.7,4,1.5,.3,10,7, 20)))
-c=CUBOID([2.4,5,0.5])
-c = T([1,2])([1.6,-5])(c)
+a=STRUCT(MKPOLS(spiralStair(0.7,3.3,1.5,.3,7,3, 20)))
+c=CUBOID([1.9,3.9,0.5])
+c = T([1,2])([1.3,-4])(c)
 
 
 
-c2=CUBOID([2.4,5,0.5])
-c2 = T([1,2,3])([-4,-5,35.4])(c2)
+
+
+
+
+
+c2=CUBOID([1.9,3.9,0.5])
+c2 = T([1,2,3])([-3.5,-4,10.8])(c2)
 
 a = STRUCT([a,c,c2])
 
-#scala = R([1,2])(-PI)(a)
 
-scala = T([1,2])([32,41])(a)
+scala = T([1,2])([31.3,40])(a)
+
+
+scala2 = T(3)(10.8)(scala)
+scala3 = T(3)(10.8)(scala2)
+scala = STRUCT([scala,scala2,scala3])
 
 
 struttura = STRUCT([struttura,giardino2,giardino1,giardino3, scala])
 VIEW(struttura)
+
 
 
 
