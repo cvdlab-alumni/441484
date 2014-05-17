@@ -23,20 +23,20 @@ hpc = cellNumbering (master,hpc)(range(len(CV)),CYAN,2)
 
 
 toMerge = 17
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  # solidifica una cella
+cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  
 #VIEW(STRUCT([hpc,cell]))     
 
 # 
 
 
 diagram = assemblyDiagramInit([3,1,1])([[0.2,3.2,7.8],[1.2],[10.5]])
-master = diagram2cell(diagram,master,toMerge)   # ha fatto la porta che e' alzata a partire dalla cella
+master = diagram2cell(diagram,master,toMerge)   
 hpc = SKEL_1(STRUCT(MKPOLS(master)))
 hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
 #VIEW(hpc)
 
 toRemove = [32]
-master = master[0], [cell for k,cell in enumerate(master[1]) if not (k in toRemove)]  # rimuove la cella della porta dal master
+master = master[0], [cell for k,cell in enumerate(master[1]) if not (k in toRemove)]  
 #DRAW(master)
 
 
@@ -57,20 +57,20 @@ hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
 #finestra salone
 
 toMerge = 26
-cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None])  # solidifica una cella
+cell = MKPOL([master[0],[[v+1 for v in  master[1][toMerge]]],None]) 
 #VIEW(STRUCT([hpc,cell]))     
 
 # 
 
 
 diagram = assemblyDiagramInit([1,3,2])([[1],[3.8,4.8,1.4],[8,2.5]])
-master = diagram2cell(diagram,master,toMerge)   # ha fatto la porta che e' alzata a partire dalla cella
+master = diagram2cell(diagram,master,toMerge)   
 hpc = SKEL_1(STRUCT(MKPOLS(master)))
 hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
 #VIEW(hpc)
 
 toRemove = [34]
-master = master[0], [cell for k,cell in enumerate(master[1]) if not (k in toRemove)]  # rimuove la cella della porta dal master
+master = master[0], [cell for k,cell in enumerate(master[1]) if not (k in toRemove)]  
 #DRAW(master)
 
 
