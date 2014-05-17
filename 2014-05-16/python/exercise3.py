@@ -142,7 +142,7 @@ def cellNumbering (larModel,hpcModel):
 
 
 
-
+## esempio di funzionamento delle funzioni sopra definite
 
 
 
@@ -154,7 +154,7 @@ master = assemblyDiagramInit([7,5,2])([[.3,4,.3,3.2,.1,5,.3],[.3,4,.1,2.9,.3],[.
 master = REMOVE_CELL(master)([13,17,37,33,53,57])
 
 
-# per farlo manualmente
+# per farlo manualmente scrivendo da input le celle da eliminare
 #master = REMOVE_CELL(master)()
 
 

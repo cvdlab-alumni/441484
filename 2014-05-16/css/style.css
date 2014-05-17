@@ -1328,13 +1328,12 @@ transition:0.5s ease-out;
 		padding:1%;
 	}
 	#menu{
-		width:500px;
-		margin-left:200px;
+		width:600px;
+		margin-left:150px;
 	}
 	#menu ul li{
 		font-size:80%;
-		width:33%;
-	}
+		width:25%;	}
 }
 /* visualizzazione per schermi con risoluzione a 1024 px per esempio netbook o tablet in visione orizzontale */
 @media screen and  (max-width: 1024px) {
