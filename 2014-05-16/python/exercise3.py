@@ -63,11 +63,11 @@ def REMOVE_CELL(master):
 
 
 def REMOVE_CELL(master):
-	hpc = SKEL_1(STRUCT(MKPOLS(master)))
-	hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
-	VIEW(hpc)
 	def REMOVE_CELL0(scelta=[]):
 		if len(scelta) == 0:
+			hpc = SKEL_1(STRUCT(MKPOLS(master)))
+			hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
+			VIEW(hpc)
 			v=True
    			while v == True:
    				i = input("Enter a number: (scrivere -1 per uscire) ")
@@ -148,37 +148,26 @@ def cellNumbering (larModel,hpcModel):
 
 DRAW = COMP([VIEW,STRUCT,MKPOLS])
 
+
 master = assemblyDiagramInit([7,5,2])([[.3,4,.3,3.2,.1,5,.3],[.3,4,.1,2.9,.3],[.3,2.7]])
-
-
-master = REMOVE_CELL(master)([13,17,37,33,53,57])
-
-
-# per farlo manualmente scrivendo da input le celle da eliminare
-#master = REMOVE_CELL(master)()
-
-
-
-VIEW_MODEL(master)
+diagram1  = assemblyDiagramInit([3,1,2])([[2,1,2],[.3],[2.2,.5]])
+diagram2  = assemblyDiagramInit([5,1,3])([[1.5,0.9,.2,.9,1.5],[.3],[1,1.4,.3]])
+master = diagram2cell(diagram2,master,59) 
+master = diagram2cell(diagram1,master,51) 
+hpc = SKEL_1(STRUCT(MKPOLS(master)))
+hpc = cellNumbering (master,hpc)(range(len(master[1])),CYAN,2)
+VIEW(hpc)
+master = REMOVE_CELL(master)([72,78,85,17,13,52,56,33,37])
 
 
 
-# QUESTA FUNZIONE VISUALIZZA I CELLNUMBERS E FA SCEGLIERE ALL'UTENTE QUALI E QUANTI BLOCCHI ELIMINARE
-#master=MERGE_AND_REMOVE([3,1,2],[[2,1,2],[.3],[2.2,.5]],47,master)()
-# 65
+'''
+OPPURE UTILIZZANDO LE FUNZIONI APPENA DEFINITE
 
+master = assemblyDiagramInit([7,5,2])([[.3,4,.3,3.2,.1,5,.3],[.3,4,.1,2.9,.3],[.3,2.7]])
+diagram2  = assemblyDiagramInit([5,1,3])([[1.5,0.9,.2,.9,1.5],[.3],[1,1.4,.3]])
+master = diagram2cell(diagram2,master,59) 
+master=MERGE_AND_REMOVE([3,1,2],[[2,1,2],[.3],[2.2,.5]],51,master)([72,78,85,17,13,52,56,33,37])
 
-
-master=MERGE_AND_REMOVE([3,1,2],[[2,1,2],[.3],[2.2,.5]],47,master)([65])
-
-
-
-
-
-#master= MERGE_AND_REMOVE([5,1,3],[[1.5,0.9,.2,.9,1.5],[.3],[1,1.4,.3]],52,master)()
-# 71 e 77
-
-master= MERGE_AND_REMOVE([5,1,3],[[1.5,0.9,.2,.9,1.5],[.3],[1,1.4,.3]],52,master)([71,77])
-
-
+'''
 
