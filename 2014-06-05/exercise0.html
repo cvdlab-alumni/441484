@@ -1,0 +1,303 @@
+      <!DOCTYPE html>
+      <html>
+      <head> 
+        <title>Appendix A - Joint</title> 
+        <style>
+        body {
+          margin: 0;
+          overflow: hidden;
+        }
+
+        #stats {  /* Align stats top-left */
+          position: absolute;
+          left: 0px;
+          top: 0px;
+        }
+        </style> 
+      </head> 
+      <body>
+        <!-- JavaScript libraries -->
+       <script type="text/javascript" src="assets/libs/three.js"></script>
+    <script type="text/javascript" src="assets/libs/jquery-1.9.0.js"></script>
+    <script type="text/javascript" src="assets/libs/stats.js"></script>
+    <script type="text/javascript" src="assets/libs/dat.gui.js"></script>
+        <script src="assets/libs/TrackballControls.js"></script>
+        <script>
+            // once everything is loaded, we run our Three.js stuff.
+            $(function () {
+              var stats = initStats();
+
+              var scene = new THREE.Scene();
+              var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+              var renderer = new THREE.WebGLRenderer();
+              var trackballControls = new THREE.TrackballControls(camera);
+
+              renderer.setClearColor(new THREE.Color(0xEEEEEE,1.0));
+              renderer.setSize(window.innerWidth,window.innerHeight);
+              renderer.shadowMapEnabled = true;
+
+              // position and point the camera to the center of the scene
+              camera.position.set(40, 0, 20);
+              camera.up = new THREE.Vector3(0,0,1);
+              camera.lookAt(scene.position);
+
+              var planeGeometry = new THREE.PlaneGeometry(20,40,200,200);
+              var planeMaterial =  new THREE.MeshLambertMaterial({color: 0x44aa5c});
+              var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+              plane.receiveShadow = true;
+
+
+              var pointColor = "#0xffd500";
+              var spotLight = new THREE.SpotLight(pointColor);		
+			   var sphereLamp;	
+			   var sphereLampMaterial;
+                  // add the plane to the scene
+                  scene.add(plane);
+
+
+                  var lightColor = "#ffffff";
+                  var directionalLight = new THREE.DirectionalLight(lightColor);
+                  directionalLight.position.set(-80, 0, 100);
+                  directionalLight.intensity = 1;
+                  scene.add(directionalLight);
+
+           /*   var axisHelper = new THREE.AxisHelper(3);
+              scene.add(axisHelper);
+              */
+              function mkJoint (radius, height) {
+                var joint = new THREE.Object3D();
+                var sphereGeometry = new THREE.SphereGeometry(radius, 50, 50);
+                var sphereMaterial = new THREE.MeshLambertMaterial({color: 0xdddd33, shading: THREE.FlatShading});
+                var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+                sphere.position.set(0, 0, 0);
+                joint.add(sphere);
+
+                var cylinderGeometry = new THREE.CylinderGeometry(radius, radius, height, 4, 4, false);
+                var cylinderMaterial = new THREE.MeshLambertMaterial({color: 0xcccccc, shading: THREE.FlatShading});
+                var cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
+                cylinder.position.set(0, height / 2 + radius, 0);
+                sphere.add(cylinder);
+
+                var hook = new THREE.Object3D();
+                hook.position.set(0, height/2+radius, 0);
+                cylinder.add(hook);
+
+                joint.sphere = sphere;
+                joint.cylinder = cylinder;
+                joint.hook = hook;
+
+                return joint;
+              }
+              
+              
+              
+              
+              function mkLamp (radius, radiusLamp) {
+                var joint = new THREE.Object3D();
+                var sphereGeometry = new THREE.SphereGeometry(radius, 50, 50);
+                var sphereMaterial = new THREE.MeshLambertMaterial({color: 0xdddd33, shading: THREE.FlatShading});
+                var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+                sphere.position.set(0, 0, 0);
+                joint.add(sphere);
+
+                var lampGeom = new THREE.SphereGeometry(radiusLamp, 50, 50, 0, Math.PI);
+                var sphereMaterial = new THREE.MeshLambertMaterial({color: 0xdddd33, shading: THREE.FlatShading});
+                sphereMaterial.side = THREE.DoubleSide;
+
+                 lamp = new THREE.Mesh(lampGeom, sphereMaterial);
+                lamp.rotation.x=1.6;
+                lamp.position.set(0, radius+radiusLamp, 0);
+                sphere.add(lamp);
+                joint.sphere = sphere;
+                joint.lamp = lamp;
+                var joint2 = new THREE.Object3D();
+                var sphereGeometry = new THREE.SphereGeometry(radiusLamp/1.8, 50, 50);
+                 sphereLampMaterial = new THREE.MeshBasicMaterial({color: 0xffd500, shading: THREE.FlatShading});
+                sphereLampMaterial.opacity=0.8;
+                sphereLampMaterial.transparent=true;
+                 sphereLamp = new THREE.Mesh(sphereGeometry, sphereLampMaterial);
+                sphereLamp.position.set(0, 0, 0);
+                joint2.add(sphereLamp);
+                
+                
+
+                spotLight.position.set(-40, 60, -10);
+                spotLight.distance = 33;
+                spotLight.angle = 0.35;
+                spotLight.exponent = 10;
+
+                spotLight.intensity=3;
+                spotLight.position.set(0, radius/3, 0);
+
+      // proprietà dell'ombra
+      spotLight.castShadow = true;
+      spotLight.shadowCameraNear = 2;
+      spotLight.shadowCameraFar = 70;
+      spotLight.shadowCameraFov = 35;
+      spotLight.shadowDarkness = 0.7;
+      spotLight.shadowMapWidth = 400;
+      spotLight.shadowMapHeight = 400;
+      
+      sphereLamp.add(spotLight);
+      
+      var sphereGeometry = new THREE.SphereGeometry(radius/3, 50, 50);
+      var sphereMaterial = new THREE.MeshLambertMaterial({color: 0xdddd33, shading: THREE.FlatShading});
+      sphereMaterial.visible = false;
+      var target = new THREE.Mesh(sphereGeometry, sphereMaterial);
+      target.position.set(0, 0, -30);
+      
+      spotLight.add(target);
+      spotLight.target = target;
+      
+      joint.lamp.add(joint2);
+      
+      return joint;
+    }
+
+
+
+
+    var height = 4;
+    var radius = 0.6;
+    var radiusLamp=1;
+
+    var joint1 = mkJoint(radius, height);
+    scene.add(joint1);
+
+    var cylinderGeometry2 = new THREE.CylinderGeometry(1.7, 1.7, 0.5, 50, 50, false);
+    var cylinderMaterial2 = new THREE.MeshLambertMaterial({color: 0xcccccc, shading: THREE.FlatShading});
+    var base = new THREE.Mesh(cylinderGeometry2, cylinderMaterial2);
+    base.position.set(0, 0, 0);
+    joint1.add(base);
+
+    joint1.sphere.position.y=0.5;
+    var joint2 = mkJoint(radius, height);
+    joint1.hook.add(joint2);
+
+    joint1.position.z +=0.25; 
+
+    joint1.rotation.x += Math.PI/2; 
+
+    joint1.rotation.y = 3; 
+    joint1.sphere.rotation.x = 0.5; 
+    joint2.rotation.y = 3; 
+    joint2.sphere.rotation.x = 1.2; 
+    joint2.sphere.rotation.x = 1.2; 
+
+    var joint3 =  mkLamp(radius, radiusLamp);
+    joint2.hook.add(joint3);
+    joint3.sphere.rotation.x=1.6;
+
+
+
+
+
+    var geometry  =new THREE.TorusGeometry( 1, 1, 16, 50 );
+    var boxMaterial = new THREE.MeshLambertMaterial({color: 0xdddd33, shading: THREE.FlatShading});
+    var object = new THREE.Mesh(geometry , boxMaterial);
+    object.castShadow = true;
+    object.position.set(-2, -7, 3);
+
+    scene.add(object);
+
+
+    function tCOn(){
+
+
+    }
+    // add the output of the renderer to the html element
+    $('body').append(renderer.domElement);
+
+    var controls = new function () {
+      this.alpha = joint1.rotation.y; 
+      this.beta = joint1.sphere.rotation.x;
+      this.gamma = joint2.rotation.x;
+      this.delta = joint2.cylinder.rotation.y;
+      this.epsilon = joint3.sphere.rotation.x;
+
+      this.x = joint1.position.x;
+      this.y = joint1.position.y;
+
+      this.SpotLight = true;
+      this.Trackball_Controls = true;
+
+    };
+
+    var gui = new dat.GUI();
+    var modify = gui.addFolder("Modify");
+
+    modify.add(controls, 'alpha', 0.0, 2*Math.PI).onChange(function (value) {
+      joint1.rotation.y = value; 
+    });
+    modify.add(controls, 'beta', 0.0, Math.PI/2).onChange(function (value) {
+      joint1.sphere.rotation.x = value; 
+    });
+    modify.add(controls, 'gamma', 0, Math.PI/2).onChange(function (value) {
+      joint2.rotation.x = value; 
+    });
+
+    modify.add(controls, 'delta', 0.0, 2*Math.PI).onChange(function (value) {
+      joint2.cylinder.rotation.y = value; 
+    });
+
+    modify.add(controls, 'epsilon', -Math.PI/8, Math.PI/2+0.4 ).onChange(function (value) {
+      joint3.sphere.rotation.x = value; 
+    });
+
+
+    var translate = gui.addFolder("Translate");
+
+
+    translate.add(controls, 'x', -7.0, 7).onChange(function (value) {
+      joint1.position.x = value; 
+
+    });
+
+    translate.add(controls, 'y',-1.0, 16).onChange(function (value) {
+      joint1.position.y = value; 
+    });
+
+    gui.add(controls, "SpotLight").onChange(function (e){
+      spotLight.visible = e;
+      object.castShadow = e;
+	if( e === false ){
+	basicMaterial = new THREE.MeshBasicMaterial({color: 0x778899, opacity: 1} ) ;
+sphereLamp.material = basicMaterial; }
+	else {
+		basicMaterial = new THREE.MeshBasicMaterial({color: 0xffd500, opacity: 1} ) ;
+sphereLamp.material = basicMaterial;
+
+}
+
+
+    });
+
+    gui.add(controls, "Trackball_Controls").onChange(function (e){
+      trackballControls.enabled = e;
+
+    });
+
+
+
+    render();
+
+
+    function render() {
+      stats.update();
+      trackballControls.update();
+      // render using requestAnimationFrame
+      requestAnimationFrame(render);
+      renderer.render(scene, camera);
+    }
+
+    function initStats() {
+      var stats = new Stats();
+      stats.setMode(0); // 0: fps, 1: ms
+      $('body').append(stats.domElement);
+      return stats;
+      }
+
+            });
+      </script>
+    </body>
+    </html>
