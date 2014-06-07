@@ -442,7 +442,6 @@ var tz=text.text2.position.z;
       this.Animation = function (){
      	 this.Restore();
              animations();
-
             }
 
       this.Restore = function (){
@@ -474,7 +473,8 @@ var tz=text.text2.position.z;
 	  }
 
       this.Animation2 = function (){
- initAnimator3();
+		  			 initAnimator3();
+
           animator3.start();
 	  }
               };
@@ -537,16 +537,21 @@ var tz=text.text2.position.z;
 		          gui.add(controls, "Restore");
 
         //define animations
-            var animator = null;
+            var animator1 = null;
                 var animator2 = null;
+var animator3=null;
 
-            var duration0 = 5; // sec
-
+            var duration1 = 5; // sec
+            var duration2 = 20; // sec
+var duration3=3;
             var loopAnimation = false;
 
-            function initAnimator() {
-              animator = new KF.KeyFrameAnimator;
-              animator.init({ 
+
+
+
+            function initAnimator1() {
+              animator1 = new KF.KeyFrameAnimator;
+              animator1.init({ 
                 interps:
                   [
                     { 
@@ -586,7 +591,7 @@ var tz=text.text2.position.z;
                     },
                   ],
                 loop: loopAnimation,
-                duration: duration0 * 1000,
+                duration: duration1 * 1000,
             easing: TWEEN.Easing.Bounce.InOut
               });
             }
@@ -598,7 +603,6 @@ var tz=text.text2.position.z;
 
 
          //  var duration2 = 38; // sec
-            var duration2 = 20; // sec
 
        function initAnimator2() {
               animator2 = new KF.KeyFrameAnimator;
@@ -729,9 +733,6 @@ var tz=text.text2.position.z;
 
 //prova ultima animazione
 
-
-var animator3=null;
-var duration3=3;
     function initAnimator3() {
               animator3 = new KF.KeyFrameAnimator;
               animator3.init({ 
@@ -856,6 +857,7 @@ var duration3=3;
 
 
 
+             animations();
 
 
 
@@ -870,16 +872,17 @@ var duration3=3;
             							 
                 joint2.sphere.rotation.y = 0;
            joint3.sphere.rotation.x=Math.PI/2.2;
-            initAnimator();
+            initAnimator1();
             initAnimator2();
-          animator.start();
+          animator1.start();
             animator2.start();
+			 initAnimator3();
+
              }
 			 
 			 
 			 
 			 
-             animations();
 		  
 		  
 		  
