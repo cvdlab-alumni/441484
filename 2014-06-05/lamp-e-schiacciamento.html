@@ -575,7 +575,7 @@
 
 
 
-            var duration2 = 35; // sec
+            var duration2 = 45; // sec
 
        function initAnimator2() {
               animator2 = new KF.KeyFrameAnimator;
@@ -623,7 +623,7 @@
                       target:text.text2.position
                     },
               { 
-                      keys:[0,.13,.2,.3,0.4,0.5,0.6,0.7,0.72,0.95,1], 
+                      keys:[0,.13,.2,.3,0.4,0.5,0.6,0.7,0.72,0.9,0.96,1], 
                       values:[
               { x : 0 ,y: 0 , z:0},
               { x : 0 ,y: 0 , z:0},
@@ -637,8 +637,9 @@
               { x : 2, y: 9.8, z: -2.4},
                     
                     
-              { x : 4, y: 0, z: 0},
-              { x : 4, y: 0, z: 0},
+              { x : 2, y: 0.4, z: 0},
+              { x: 2,y: 0,z : 0 },
+              { x: 2,y: 0,z : 0 },
                      
               { x : 0 ,y: 0 , z:0},
 
@@ -691,6 +692,19 @@
 
                       ],
                       target:joint2.rotation
+                    }, { 
+                      keys:[0,0.72,0.9,0.96, 1], 
+                      values:[
+                { height: text.text2.height},
+                { height: text.text2.height},
+                { height: 0},
+              
+                { height: 0},
+              
+                { height: text.text2.height},
+
+                      ],
+                      target:text.text2.options
                     },
 				
                   ],
