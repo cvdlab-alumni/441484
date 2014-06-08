@@ -105,7 +105,7 @@
                 var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
                 var renderer = new THREE.WebGLRenderer();
                 var trackballControls = new THREE.TrackballControls(camera);
-				trackballControls.enabled=false;
+				trackballControls.enabled=true;
 
                 renderer.setClearColor(new THREE.Color(0xEEEEEE,1.0));
                 renderer.setSize(window.innerWidth,window.innerHeight);
@@ -123,19 +123,6 @@
                 plane.receiveShadow = true;
 
                 var step = 0;
-
-
-
-                
-
-
-
-
-
-
-
-
-
 
 
 
@@ -253,7 +240,7 @@ function createMesh2(geom) {
 
               var axisHelper = new THREE.AxisHelper(3);
               scene.add(axisHelper);
-
+var a2=false;
               function mkJoint (radius, height) {
                 var joint = new THREE.Object3D();
                 var sphereGeometry = new THREE.SphereGeometry(radius, 50, 50);
@@ -482,15 +469,14 @@ function createMesh2(geom) {
                   this.Trackball = trackballControls.enabled;
 				  this.Info = function(){				  
 					          $( '#dialog2' ).dialog( "open" );
+ 
 					  }
-                  this.Animation = function (){
+                  this.Animation2 = function (){
                     this.Restore_Lamp();
                     animation1();
+					a2 = true;
                   }
-					this.Full_Restore = function (){
-						location.reload();	
-	
-					}
+					
                   this.Restore_Lamp = function (){
                     
                     text.text2.position.z=tz;
@@ -519,9 +505,16 @@ function createMesh2(geom) {
                     
                   }
 
-                  this.Animation2 = function (){
+                  this.Animation1 = function (){
+					  
+					  if(a2){
+						  
+						location.reload();	
+						  }
+					  else{
                     this.Restore_Lamp();
                     initAnimator3();
+					  }
                   }
                 };
 
@@ -577,11 +570,10 @@ function createMesh2(geom) {
 
                 });
                 
-                
-                gui.add(controls, "Animation");
+                                gui.add(controls, "Animation1");
+
                 gui.add(controls, "Animation2");
                 gui.add(controls, "Restore_Lamp");
-                gui.add(controls, "Full_Restore");
                 gui.add(controls, "Info");
 
 
@@ -601,10 +593,12 @@ function createMesh2(geom) {
 
 
 
+
+
+
   if( navigator.userAgent.indexOf('Chrome') == -1) {//se safari
    var cubeGeometry = new THREE.CubeGeometry(3, 10,200);
    var meshMaterial1 = createMaterial("vertex-shader", "fragment-shader-1");
-   $( '#dialog2' ).dialog( "open" );
 
 
  } 
@@ -620,7 +614,6 @@ function createMesh2(geom) {
     buttons: {
       "Chiudi": function() {
         $( this ).dialog( "close" );
-        $( '#dialog2' ).dialog( "open" );
 
       }
     }
@@ -644,29 +637,13 @@ scene.add(cube);
 cube.position.x-=10;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
           //define animations
           var animator1 = null;
           var animator2 = null;
           var animator3=null;
-
-              var duration1 = 3; // sec
-              var duration2 = 20; // sec
-              var loopAnimation = false;
-
-
+          var duration1 = 3; // sec
+          var duration2 = 20; // sec
+          var loopAnimation = false;
 
 
 
@@ -675,10 +652,8 @@ cube.position.x-=10;
                joint1.rotation.y = 0;
                joint1.rotation.z = 0;
                text.text2.position.z=tz;
-
                joint1.sphere.rotation.x = -(Math.PI/6);
                joint2.rotation.x = (Math.PI/2.5); 
-               
                joint2.sphere.rotation.y = 0;
                joint3.sphere.rotation.x=Math.PI/2.2;
                animator1 = new KF.KeyFrameAnimator;
@@ -690,9 +665,7 @@ cube.position.x-=10;
                   values:[
                   { y : text.rotation.y },
                   { y : 0 },
-
                   { y : Math.PI/1.9 },
-
                   { y : Math.PI/2 },
                   ],
                   target:text.rotation
@@ -703,7 +676,6 @@ cube.position.x-=10;
                   { z : text.position.z ,y: text.position.y  },
                   { z : -16 ,y: 5  },
                   { z : 13 ,y: 6  },
-
                   { z : 19, y: 6.5 },
                   ],
                   target:text.position
@@ -713,10 +685,7 @@ cube.position.x-=10;
                   values:[
                   { x : joint1.position.x ,y: joint1.position.y , z:joint1.position.z},
                   { x : 0 ,y: 0 , z:0},
-                  
                   { x : 0 ,y: 0 , z:0},
-
-
                   ],
                   target:joint1.position
                 },
@@ -750,7 +719,6 @@ cube.position.x-=10;
                 { y : -1},
                 { y : 0},
                 { y : joint2.sphere.rotation.y },
-
                 ],
                 target:joint2.sphere.rotation
               },
@@ -770,8 +738,6 @@ cube.position.x-=10;
                 values:[
                 { x : text.text2.position.x ,y: text.text2.position.y,z:text.text2.position.z },
                 { x : text.text2.position.x ,y: text.text2.position.y,z:text.text2.position.z  },
-
-                
                 { x : 10 ,y: 8,z:text.text2.position.z  },
                 { x : 18, y: 8,z:text.text2.position.z  },
                 { x : 20, y: 3.5, z: 8},
@@ -789,23 +755,16 @@ cube.position.x-=10;
                 values:[
                 { x : 0 ,y: 0 , z:0},
                 { x : 0 ,y: 0 , z:0},
-                
                 { x : -1, y: 7, z: 10 },
                 { x : -2, y: 11, z: 16 },
                 { x : 8, y: 3.5, z: 20},
                 { x : 0, y: 15.4, z: 2},
-
                 { x : 2, y: 11.3, z: -2.4},
                 { x : 2, y: 9.8, z: -2.4},
-                
-                
                 { x : 2, y: 0.4, z: 0},
                 { x: 2,y: 0,z : 0 },
                 { x: 2,y: 0,z : 0 },
-                
                 { x : 0 ,y: 0 , z:0},
-
-
                 ],
                 target:joint1.position
               },
@@ -814,7 +773,6 @@ cube.position.x-=10;
                 values:[
                 { y: joint1.rotation.y },
                 { y: -Math.PI/6 },
-                
                 { y: -Math.PI/1.6},
                 { y: -Math.PI/1.6},
                 { y: -(3*Math.PI/2)},
@@ -846,12 +804,8 @@ cube.position.x-=10;
                 { x: joint2.rotation.x },
                 { x: joint2.rotation.x },
                 { x: Math.PI/1.5 },
-
                 { x: (Math.PI/2.5) },
                 { x: (Math.PI/2.5) },
-
-                
-
                 ],
                 target:joint2.rotation
               },
@@ -982,6 +936,7 @@ cube.position.x-=10;
 
 
   controls.Restore_Lamp();
+       initAnimator3();
 
               // call the render function
               render();
@@ -1001,6 +956,10 @@ initAnimator1();}, 1500);
 }
 
 
+
+
+	
+	
 var step=0;
 
 function render() {
@@ -1027,12 +986,11 @@ function render() {
       <p> Salve, purtroppo soltanto Safari e Firefox supportano lo shader di cui si fa uso in questo homework. Per gli atri browser il materiale del muro è stato sostituito con un altro. Grazie</p>
     </div>  <div hidden id="dialog2" title="Informazioni di utilizzo">
     <p> Benvenuto all'homework N.4 di Grafica Computazionale!!<br> Seguono alcune informazioni di servizio:<ul>
-    <li> Dopo la prima esecuzione di una qualsiasi animazione, la scritta cambia posizione e le successive chiamate di animazioni appariranno volutamente modificate (il testo riparte dalla sua ultima posizione).</li>
-    <li>Attenzione: eseguire l'animazione 2 più di una volta, poiché per un errore nel framework keyframe.js in presenza di piu animazioni, la prima esecuzione potrebbe terminare in modo indesiderato.</li>
+    <li> Dopo l'esecuzione automatica della prima animazione, la scritta cambia posizione, e la prossima animazione farà partire la scritta da quest'ultima posizione.</li>
+    <li>Attenzione: se dopo l'esecuzione di Animation2 si esegue Animation1, la scritta tornerà alla posizione di origine.</li>
     <li>
       Trackball: abilita/disabilita il controllo trackball (fastidioso durante l'uso della gui).</li><li>
-      Restore Lamp: annulla tutte le modifiche di luce, forma e traslazione della lampada.</li><li>
-      Full Restore: ricarica l'ambiente per tornare alle condizioni di partenza.</li></ul><br> Grazie!
+      Restore Lamp: annulla tutte le modifiche di luce, forma e traslazione della lampada.</li></ul><br> Grazie!
     </p>
   </div>
 
