@@ -21,7 +21,11 @@
         }
         .ui-widget {
           font-size: 80%;
-        }
+        }ul {
+    list-style-type: circle; /* nessun elemento come marcatore */
+    padding-left:3px;       /* padding nullo */
+    margin-left: 3px;        /* margine nullo */
+}
         </style> 
         <meta charset="utf-8"> 
       </head> 
@@ -101,6 +105,7 @@
                 var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
                 var renderer = new THREE.WebGLRenderer();
                 var trackballControls = new THREE.TrackballControls(camera);
+				trackballControls.enabled=false;
 
                 renderer.setClearColor(new THREE.Color(0xEEEEEE,1.0));
                 renderer.setSize(window.innerWidth,window.innerHeight);
@@ -176,8 +181,8 @@
   //shader
 
   function createMaterial(vertexShader, fragmentShader) {
-    var vertShader = document.getElementById(vertexShader).innerHTML;
-    var fragShader = document.getElementById(fragmentShader).innerHTML;
+    var vertShader = $('#'+vertexShader).text();
+    var fragShader = $('#'+fragmentShader).text();
 
     var attributes = {};
     var uniforms = {
@@ -596,8 +601,7 @@ function createMesh2(geom) {
 
 
 
-
-  if( navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf('Chrome') == -1) {//se safari
+  if( navigator.userAgent.indexOf('Chrome') == -1) {//se safari
    var cubeGeometry = new THREE.CubeGeometry(3, 10,200);
    var meshMaterial1 = createMaterial("vertex-shader", "fragment-shader-1");
    $( '#dialog2' ).dialog( "open" );
@@ -978,7 +982,6 @@ cube.position.x-=10;
 
 
   controls.Restore_Lamp();
-trackballControls.enabled=false;
 
               // call the render function
               render();
@@ -1019,13 +1022,15 @@ function render() {
               });
     </script>
     <div hidden id="dialog" title="Messaggio importante">
-      <p> Salve, purtroppo soltanto Safari supporta lo shader di cui si fa uso in questo homework. Per tutti gli atri browser il materiale del muro è stato sostituito con un altro. Grazie</p>
+      <p> Salve, purtroppo soltanto Safari e Firefox supportano lo shader di cui si fa uso in questo homework. Per gli atri browser il materiale del muro è stato sostituito con un altro. Grazie</p>
     </div>  <div hidden id="dialog2" title="Informazioni di utilizzo">
-    <p> Benvenuto all'homework N.4 di Grafica Computazionale!!<br> Come si è potuto osservare, nella GUI sono disponibili due animazioni.<br>
-      Ognuna di essa è possibile rivederla (anche modificata dalla successiva posizione della scritta).<br>
-      Importante è la funzione "Trackball" che permette di abilitare/disabilitare comodamente il controllo trackball (fastidioso durante l'uso della gui).<br>
-      Con "Restore Lamp" è possibile annullare tutte le modifiche di luce, forma e traslazione della lampada, in modo che torni alla posizione di origine.<br>
-      Infine con Full Restore si ha un ricaricamento dell'ambiente tornando alle condizioni di partenza. Grazie!
+    <p> Benvenuto all'homework N.4 di Grafica Computazionale!!<br> Seguono alcune informazioni di servizio:<ul>
+    <li> Dopo la prima esecuzione di una qualsiasi animazione, la scritta cambia posizione e le successive chiamate di animazioni appariranno volutamente modificate (il testo riparte dalla sua ultima posizione).</li>
+    <li>"Spotlight" accende e spegne la lampadina</li>
+    <li>
+      Importante è la funzione "Trackball" che permette di abilitare/disabilitare comodamente il controllo trackball (fastidioso durante l'uso della gui).</li><li>
+      Con "Restore Lamp" è possibile annullare tutte le modifiche di luce, forma e traslazione della lampada, in modo che torni alla posizione di origine.</li><li>
+      Infine con Full Restore viene ricaricato l'ambiente per tornare alle condizioni di partenza (testo in posizione iniziale).</li></ul><br> Grazie!
     </p>
   </div>
 
